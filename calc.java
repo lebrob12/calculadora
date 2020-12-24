@@ -3,7 +3,6 @@ package com.company;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class calc {
     private JPanel mainpanel;
     private JButton a0button;
@@ -27,6 +26,10 @@ public class calc {
     private  double total;
     private double total1;
     private String sy;
+    // ImageIcon logo= new ImageIcon("example.jpg");
+
+
+
     public calc() {
 
         a1Button.addActionListener(new ActionListener() {
@@ -120,6 +123,15 @@ public class calc {
 
             }
         });
+        pointbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String a0txt=txtdisplay.getText()+pointbutton.getText();
+                txtdisplay.setText(a0txt);
+
+
+            }
+        });
 
 
         plusbutton.addActionListener(new ActionListener() {
@@ -197,13 +209,14 @@ public class calc {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("calc");
+        JFrame frame = new JFrame("Calculadora");
         frame.setContentPane(new calc().mainpanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setSize(500,300);
+        // frame.setIconImage(logo.getImage());
     }
 
 
