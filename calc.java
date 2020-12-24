@@ -1,9 +1,13 @@
 package com.company;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+
 public class calc {
+    File file=new File("history.txt");
     private JPanel mainpanel;
     private JButton a0button;
     private JTextField txtdisplay;
@@ -23,22 +27,52 @@ public class calc {
     private JButton divisonbutton;
     private JButton multibutton;
     private JButton equalbutton;
+    private JButton historyButton;
     private  double total;
-    private double total1;
     private String sy;
-    // ImageIcon logo= new ImageIcon("example.jpg");
-
-
-
+     static ImageIcon logo= new ImageIcon("example.jpg");
     public calc() {
+
+
+
+
+
+
+
+
+        historyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = null;
+                try {
+                    BufferedReader in = new BufferedReader(new FileReader(new File("history.txt")));
+                    String line;
+                    try {
+                        while((line = in.readLine())!= null){
+                            text = text + line;
+                        }
+                        in.close();
+                    } catch (IOException f) {
+                        f.printStackTrace();
+                    }
+                } catch (FileNotFoundException f) {
+                    f.printStackTrace();
+                }
+                String textToDisplay = text;
+                JPanel panel = new JPanel();
+                JLabel jlabel = new JLabel(textToDisplay);
+                jlabel.setFont(new Font("Verdana",1,10));
+                panel.add(jlabel);
+                panel.setVisible(true);
+            }
+        });
+
 
         a1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String a1txt=txtdisplay.getText()+a1Button.getText();
                 txtdisplay.setText(a1txt);
-
-
             }
         });
         a2button.addActionListener(new ActionListener() {
@@ -100,8 +134,6 @@ public class calc {
             public void actionPerformed(ActionEvent e) {
                 String a8txt=txtdisplay.getText()+a8Button.getText();
                 txtdisplay.setText(a8txt);
-
-
             }
         });
         a9Button.addActionListener(new ActionListener() {
@@ -109,31 +141,22 @@ public class calc {
             public void actionPerformed(ActionEvent e) {
                 String a9txt=txtdisplay.getText()+a9Button.getText();
                 txtdisplay.setText(a9txt);
-
-
             }
         });
-
         a0button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String a0txt=txtdisplay.getText()+a0button.getText();
                 txtdisplay.setText(a0txt);
-
-
             }
         });
         pointbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String a0txt=txtdisplay.getText()+pointbutton.getText();
-                txtdisplay.setText(a0txt);
-
-
+                String dis=txtdisplay.getText()+pointbutton.getText();
+                txtdisplay.setText(dis);
             }
         });
-
-
         plusbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -200,9 +223,15 @@ public class calc {
                         txtdisplay.setText(String.valueOf(total));
                         break;
                 }
+               try {
+                   FileWriter in=new FileWriter(file);
+                    in.write(String.valueOf(total));
+                    in.close();
 
-
-
+               }
+             catch (IOException ioException) {
+                   ioException.printStackTrace();
+               }
             }
         });
 
@@ -213,10 +242,11 @@ public class calc {
         frame.setContentPane(new calc().mainpanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        ImageIcon logo= new ImageIcon("example.png");
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setSize(500,300);
-        // frame.setIconImage(logo.getImage());
+        frame.setIconImage(logo.getImage());
     }
 
 
