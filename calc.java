@@ -29,6 +29,8 @@ public class calc {
     private JButton equalbutton;
     private JButton historyButton;
     private JButton del;
+    private JButton x12Button;
+    private JButton x2Button;
     private double total;
     private String sy;
     static ImageIcon logo = new ImageIcon("example.jpg");
@@ -244,6 +246,18 @@ public class calc {
                }
            }
       });
+        x2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtdisplay.setText(String.valueOf(Math.pow(Double.parseDouble(txtdisplay.getText()),2)));
+            }
+        });
+        x12Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtdisplay.setText(String.valueOf(Math.pow(Double.parseDouble(txtdisplay.getText()),0.5)));
+            }
+        });
     }
 public static int algarismos(double num){
     String s = "" + num;
